@@ -17,6 +17,11 @@ add_executable(sysguard
     app/main.cpp
 )
 
+target_include_directories(sysguard
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
 if(SYSGUARD_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)

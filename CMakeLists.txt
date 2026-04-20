@@ -15,6 +15,7 @@ option(SYSGUARD_BUILD_TESTS "Build tests" ON)
 
 add_executable(sysguard
     app/main.cpp
+    src/config.cpp
 )
 
 target_include_directories(sysguard

@@ -1,17 +1,22 @@
-#ifndef SYSGUARD_METRIC_SNAPSHOT_H              // prevent multiple includes
-#define SYSGUARD_METRIC_SNAPSHOT_H
+#ifndef SYSGUARD_MONITOR_ENGINE_H              // prevent multiple includes
+#define SYSGUARD_MONITOR_ENGINE_H
 /******************************************************************************
 * Include Files
 ******************************************************************************/
+#include "config.h"
+#include "metric_snapshot.h"
+
+#include <string>
+#include <vector>
 
 /******************************************************************************
-* typedefs
+* Class MonitorEngine
 ******************************************************************************/
-struct MetricSnapshot
+class MonitorEngine
 {
-    double cpu_usage_percent   {0.0};
-    double memory_usage_percent{0.0};
-    double disk_usage_percent  {0.0};
+    public:
+        std::vector<std::string> evaluate(const MetricSnapshot& snapshot,
+                                          const AppConfig& config) const;
 };
 
 #endif

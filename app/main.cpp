@@ -3,8 +3,10 @@
 ******************************************************************************/
 
 #include "config.h"
+#include "monitor_engine.h"
+#include "metric_snapshot.h"
 
-#include <exception>
+//#include <exception>
 #include <iostream>
 
 /******************************************************************************
@@ -17,17 +19,22 @@ int main()
     {
         const AppConfig config{load_config("config/example_config.ini")};
 
+        MetricSnapshot snapshot;
+        snapshot.cpu_usage_percent = 90.0;
+        snapshot.memory_usage_percent = 50.0;
+        snapshot.disk_usage_percent = 95.0;
+
+        MonitorEngine engine;
+        const auto alerts = engine.evaluate(snapshot, config);
+
         std::cout << "sysguard starting..." << std::endl;
 
-        std::cout << "CPU threshold: " 
-                  << config.thresholds.cpu_usage_percent 
-                  << std::endl;
-        std::cout << "Memory threshold: " 
-                  << config.thresholds.memory_usage_percent 
-                  << std::endl;
-        std::cout << "Disk threshold: " 
-                  << config.thresholds.disk_usage_percent
-                  << std::endl;
+        for(const auto& alert : alerts)
+        {
+            std::cout << "[WARNING] " << alert << std::endl; 
+        }
+
+        return 0;
     
     } 
     catch (const std::exception& exception) 

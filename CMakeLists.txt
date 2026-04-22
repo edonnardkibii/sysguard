@@ -17,6 +17,7 @@ add_executable(sysguard
     app/main.cpp
     src/config.cpp
     src/monitor_engine.cpp
+    src/linux_metrics_provider.cpp
 )
 
 target_include_directories(sysguard

@@ -3,8 +3,8 @@
 ******************************************************************************/
 
 #include "config.h"
+#include "linux_metrics_provider.h"
 #include "monitor_engine.h"
-#include "metric_snapshot.h"
 
 //#include <exception>
 #include <iostream>
@@ -19,10 +19,8 @@ int main()
     {
         const AppConfig config{load_config("config/example_config.ini")};
 
-        MetricSnapshot snapshot;
-        snapshot.cpu_usage_percent = 90.0;
-        snapshot.memory_usage_percent = 50.0;
-        snapshot.disk_usage_percent = 95.0;
+        LinuxMetricsProvider provider;
+        MetricSnapshot snapshot = provider.collect();
 
         MonitorEngine engine;
         const auto alerts = engine.evaluate(snapshot, config);
@@ -33,6 +31,8 @@ int main()
         {
             std::cout << "[WARNING] " << alert << std::endl; 
         }
+
+        std::cout << "sysguard safely ended" << std::endl;
 
         return 0;
     

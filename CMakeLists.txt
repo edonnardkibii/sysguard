@@ -16,8 +16,9 @@ option(SYSGUARD_BUILD_TESTS "Build tests" ON)
 add_executable(sysguard
     app/main.cpp
     src/config.cpp
-    src/monitor_engine.cpp
     src/linux_metrics_provider.cpp
+    src/logger.cpp
+    src/monitor_engine.cpp
 )
 
 target_include_directories(sysguard

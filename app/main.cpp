@@ -4,9 +4,10 @@
 
 #include "config.h"
 #include "linux_metrics_provider.h"
+#include "logger.h"
 #include "monitor_engine.h"
 
-// #include <exception>
+#include <exception>
 #include <iostream>
 
 /******************************************************************************
@@ -17,29 +18,33 @@ int main()
 {
     try
     {
-        const AppConfig config{load_config("config/example_config.ini")};
+        const AppConfig config{load_config("../config/example_config.ini")};
+        Logger logger{config.logging.log_to_file, config.logging.log_file};
+
+        logger.info("sysguard starting");
 
         LinuxMetricsProvider provider;
-        MetricSnapshot snapshot = provider.collect();
+        const MetricSnapshot snapshot{provider.collect()};
 
         MonitorEngine engine;
-        const auto alerts = engine.evaluate(snapshot, config);
-
-        std::cout << "sysguard starting..." << std::endl;
+        const auto alerts{engine.evaluate(snapshot, config)};
 
         for (const auto &alert : alerts)
         {
-            std::cout << "[WARNING] " << alert << std::endl;
+            logger.warning(alert);
         }
 
-        std::cout << "sysguard safely ended" << std::endl;
+        if (alerts.empty())
+        {
+            logger.info("No theshold violations detected");
+        }
 
         return 0;
     }
     catch (const std::exception &exception)
     {
-        std::cerr << "Failed to start sysguard" << exception.what()
-                  << std::endl;
+        Logger logger{false, ""};
+        logger.error(exception.what());
         return 1;
     }
 }

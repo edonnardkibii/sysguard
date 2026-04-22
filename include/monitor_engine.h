@@ -1,8 +1,8 @@
-#ifndef SYSGUARD_MONITOR_ENGINE_H              // prevent multiple includes
+#ifndef SYSGUARD_MONITOR_ENGINE_H // prevent multiple includes
 #define SYSGUARD_MONITOR_ENGINE_H
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 #include "config.h"
 #include "metric_snapshot.h"
 
@@ -10,13 +10,13 @@
 #include <vector>
 
 /******************************************************************************
-* Class MonitorEngine
-******************************************************************************/
+ * Class MonitorEngine
+ ******************************************************************************/
 class MonitorEngine
 {
-    public:
-        std::vector<std::string> evaluate(const MetricSnapshot& snapshot,
-                                          const AppConfig& config) const;
+  public:
+    std::vector<std::string> evaluate(const MetricSnapshot &snapshot,
+                                      const AppConfig &config) const;
 };
 
 #endif

@@ -1,27 +1,26 @@
-#ifndef SYSGUARD_MOCK_METRICS_PROVIDER_H       // prevent multiple includes
+#ifndef SYSGUARD_MOCK_METRICS_PROVIDER_H // prevent multiple includes
 #define SYSGUARD_MOCK_METRICS_PROVIDER_H
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 #include "i_metrics_provider.h"
 
 /******************************************************************************
-* Class MockMetricsProvider
-******************************************************************************/
+ * Class MockMetricsProvider
+ ******************************************************************************/
 
 class MockMetricsProvider : public IMetricsProvider
 /**
-* @brief Mock metrics provider for deterministic testing
-*/
+ * @brief Mock metrics provider for deterministic testing
+ */
 {
-    public:
+  public:
+    MetricSnapshot snapshot;
 
-        MetricSnapshot snapshot;
-
-        MetricSnapshot collect() override
-        {
-            return snapshot;
-        }
+    MetricSnapshot collect() override
+    {
+        return snapshot;
+    }
 };
 
 #endif

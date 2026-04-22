@@ -1,6 +1,6 @@
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 #include "linux_metrics_provider.h"
 
 #include <fstream>
@@ -8,30 +8,30 @@
 #include <string>
 
 /******************************************************************************
-* Code
-******************************************************************************/
+ * Code
+ ******************************************************************************/
 static double read_memory_usage_percent()
 /**
-* @brief Read memory usage from /proc/meminfo
-*/
+ * @brief Read memory usage from /proc/meminfo
+ */
 {
     std::ifstream file("/proc/meminfo");
 
-    if(!file.is_open())
+    if (!file.is_open())
     {
         throw std::runtime_error("Failed to read /proc/meminfo");
     }
 
-    std::string key   = "";
-    long        value = -1;
-    std::string unit  = "";
+    std::string key = "";
+    long value = -1;
+    std::string unit = "";
 
-    long total     = 0;
+    long total = 0;
     long available = 0;
 
-    while(file >> key >> value >> unit)
+    while (file >> key >> value >> unit)
     {
-        if(key == "MemTotal:")
+        if (key == "MemTotal:")
         {
             total = value;
         }
@@ -40,13 +40,13 @@ static double read_memory_usage_percent()
             available = value;
         }
 
-        if(total && available)
+        if (total && available)
         {
             break;
         }
     }
 
-    if(total == 0)
+    if (total == 0)
     {
         throw std::runtime_error("Failed to parse MemTotal");
     }
@@ -58,21 +58,21 @@ static double read_memory_usage_percent()
 
 MetricSnapshot LinuxMetricsProvider::collect()
 /**
-* @brief collect system metrics from Linux system interfaces
-*
-* @return Metric snapshot containing CPU, memory and disk usage
-*/
+ * @brief collect system metrics from Linux system interfaces
+ *
+ * @return Metric snapshot containing CPU, memory and disk usage
+ */
 {
     MetricSnapshot snapshot{};
 
     // CPU
-    snapshot.cpu_usage_percent    = 0.0;
+    snapshot.cpu_usage_percent = 0.0;
 
     // Memory
     snapshot.memory_usage_percent = read_memory_usage_percent();
 
     // Disk
-    snapshot.disk_usage_percent   = 0.0;
+    snapshot.disk_usage_percent = 0.0;
 
     return snapshot;
 }

@@ -1,20 +1,20 @@
-#ifndef SYSGUARD_I_METRICS_PROVIDER_H            // prevent multiple includes
+#ifndef SYSGUARD_I_METRICS_PROVIDER_H // prevent multiple includes
 #define SYSGUARD_I_METRICS_PROVIDER_H
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 #include "metric_snapshot.h"
 
 /******************************************************************************
-* Class IMetricsProvider
-******************************************************************************/
+ * Class IMetricsProvider
+ ******************************************************************************/
 
 class IMetricsProvider
 {
-    public:
-        virtual ~IMetricsProvider() = default;
+  public:
+    virtual ~IMetricsProvider() = default;
 
-        virtual MetricSnapshot collect() = 0;
+    virtual MetricSnapshot collect() = 0;
 };
 
 #endif

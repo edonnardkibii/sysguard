@@ -1,21 +1,21 @@
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 
 #include "config.h"
 #include "linux_metrics_provider.h"
 #include "monitor_engine.h"
 
-//#include <exception>
+// #include <exception>
 #include <iostream>
 
 /******************************************************************************
-* Code
-******************************************************************************/
+ * Code
+ ******************************************************************************/
 
 int main()
 {
-    try 
+    try
     {
         const AppConfig config{load_config("config/example_config.ini")};
 
@@ -27,19 +27,19 @@ int main()
 
         std::cout << "sysguard starting..." << std::endl;
 
-        for(const auto& alert : alerts)
+        for (const auto &alert : alerts)
         {
-            std::cout << "[WARNING] " << alert << std::endl; 
+            std::cout << "[WARNING] " << alert << std::endl;
         }
 
         std::cout << "sysguard safely ended" << std::endl;
 
         return 0;
-    
-    } 
-    catch (const std::exception& exception) 
+    }
+    catch (const std::exception &exception)
     {
-        std::cerr << "Failed to start sysguard" << exception.what() << std::endl;
+        std::cerr << "Failed to start sysguard" << exception.what()
+                  << std::endl;
         return 1;
     }
 }

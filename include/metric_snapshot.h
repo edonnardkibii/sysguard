@@ -1,17 +1,17 @@
-#ifndef SYSGUARD_METRIC_SNAPSHOT_H              // prevent multiple includes
+#ifndef SYSGUARD_METRIC_SNAPSHOT_H // prevent multiple includes
 #define SYSGUARD_METRIC_SNAPSHOT_H
 /******************************************************************************
-* Include Files
-******************************************************************************/
+ * Include Files
+ ******************************************************************************/
 
 /******************************************************************************
-* typedefs
-******************************************************************************/
+ * typedefs
+ ******************************************************************************/
 struct MetricSnapshot
 {
-    double cpu_usage_percent   {0.0};
+    double cpu_usage_percent{0.0};
     double memory_usage_percent{0.0};
-    double disk_usage_percent  {0.0};
+    double disk_usage_percent{0.0};
 };
 
 #endif
